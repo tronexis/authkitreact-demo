@@ -90,9 +90,9 @@ const SignInComponent = () => {
         </form>
       ) : (
         <div className="flex flex-col space-y-3">
-          <h2 className="text-lg whitespace-pre-wrap break-words max-w-sm">
-            {JSON.stringify(user)}
-          </h2>
+          <pre className="text-lg whitespace-pre-wrap break-words max-w-sm max-sm:px-2">
+            {JSON.stringify(user, null, 1)}
+          </pre>
           <button onClick={handleSignOut}>Sign out</button>
         </div>
       )}
