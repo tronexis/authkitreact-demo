@@ -3,13 +3,15 @@ import axios from "axios";
 import { useSignIn, useSignOut, useIsAuthenticated } from "react-auth-kit";
 
 const SignInComponent = () => {
+  const dummyData = {
+    username: "kminchelle",
+    password: "0lelplR",
+  };
+
   const signIn = useSignIn();
   const signOut = useSignOut();
   const isAuthenticated = useIsAuthenticated();
-  const [formData, setFormData] = React.useState({
-    username: "",
-    password: "",
-  });
+  const [formData, setFormData] = React.useState({ ...dummyData });
 
   const [user, setUser] = React.useState<any>(null);
 
@@ -43,37 +45,52 @@ const SignInComponent = () => {
     signOut();
   };
 
+  const inputStyle = `p-2 rounded-lg`;
+  const copyableTextStyle = `hover:text-purple-300 cursor-pointer`;
+
   return (
     <>
       {!user && !isAuthenticated() ? (
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
-          <p onClick={() => navigator.clipboard.writeText("kminchelle")}>
-            username: kminchelle
+          <p
+            className={copyableTextStyle}
+            onClick={() => navigator.clipboard.writeText("kminchelle")}
+          >
+            Username: {dummyData.username}
           </p>
-          <p onClick={() => navigator.clipboard.writeText("0lelplR")}>
-            password: 0lelplR
+          <p
+            className={copyableTextStyle}
+            onClick={() => navigator.clipboard.writeText("0lelplR")}
+          >
+            Password: {dummyData.password}
           </p>
-          <small>click the username or password text above to copy them</small>
+          <small className="italic text-zinc-500">
+            click the username or password text above to copy them
+          </small>
           <input
             type={"text"}
-            placeholder="Enter username"
+            className={inputStyle}
+            placeholder="Enter Username"
+            value={formData.username}
             onChange={(e) =>
               setFormData({ ...formData, username: e.target.value })
             }
           />
           <input
             type={"password"}
-            placeholder="Enter password"
+            className={inputStyle}
+            placeholder="Enter Password"
+            value={formData.password}
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
             }
           />
 
-          <button>Submit</button>
+          <button>Sign in</button>
         </form>
       ) : (
         <div className="flex flex-col space-y-3">
-          <h2 className="text-lg whitespace-pre-wrap break-words">
+          <h2 className="text-lg whitespace-pre-wrap break-words max-w-sm">
             {JSON.stringify(user)}
           </h2>
           <button onClick={handleSignOut}>Sign out</button>
