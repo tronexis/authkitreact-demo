@@ -10,9 +10,10 @@ const SignInComponent = () => {
     username: "",
     password: "",
   });
+
   const [user, setUser] = React.useState<any>(null);
 
-  const onSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     axios.post("https://dummyjson.com/auth/login", formData).then((res) => {
       if (res.status === 200) {
@@ -32,7 +33,6 @@ const SignInComponent = () => {
           console.log(res.data);
         } else {
           //Throw error
-          console.log(res.data);
         }
       }
     });
@@ -46,7 +46,7 @@ const SignInComponent = () => {
   return (
     <>
       {!user && !isAuthenticated() ? (
-        <form onSubmit={onSubmit} className="flex flex-col space-y-3">
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
           <p onClick={() => navigator.clipboard.writeText("kminchelle")}>
             username: kminchelle
           </p>
