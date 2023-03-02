@@ -56,12 +56,14 @@ const SignInComponent = () => {
           <small>click the username or password text above to copy them</small>
           <input
             type={"text"}
+            placeholder="Enter username"
             onChange={(e) =>
               setFormData({ ...formData, username: e.target.value })
             }
           />
           <input
             type={"password"}
+            placeholder="Enter password"
             onChange={(e) =>
               setFormData({ ...formData, password: e.target.value })
             }
